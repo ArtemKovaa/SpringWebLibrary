@@ -1,19 +1,12 @@
 package ru.rusart.springprojects.dao;
 
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
-import ru.rusart.springprojects.models.Book;
-import ru.rusart.springprojects.models.Person;
 
 @Component
 public class BookDAO {
 	
-	private final JdbcTemplate jdbcTemplate;
+/*	private final JdbcTemplate jdbcTemplate;
 	
 	@Autowired
 	public BookDAO(JdbcTemplate jdbcTemplate) {
@@ -59,4 +52,6 @@ public class BookDAO {
 	public void update(int id, Book book) {
 		jdbcTemplate.update("UPDATE Book SET title = ?, author = ?, year_of_writing = ? WHERE book_id = ?", book.getTitle(), book.getAuthor(), book.getYearOfWriting(), id);
 	}
+	
+*/
 }

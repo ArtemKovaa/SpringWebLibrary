@@ -14,7 +14,7 @@
 <b th:unless="${#lists.isEmpty(list)}">Books:</b> 
 
 <div th:unless="${#lists.isEmpty(list)}" th:each="book : ${list}" >
-	<p  th:text="${book.getTitle()} + ', ' + ${book.getAuthor()} + ', ' + ${book.getYearOfWriting}">Books information</p>
+	<p th:style="${book.getIsOverdued()} ? 'color:red' : 'color:black'" th:text="${book.getTitle()} + ', ' + ${book.getAuthor()} + ', ' + ${book.getYearOfWriting}">Books information</p>
 </div>
 
 <hr/>

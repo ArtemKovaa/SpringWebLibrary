@@ -1,18 +1,11 @@
 package ru.rusart.springprojects.dao;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
-import ru.rusart.springprojects.models.Person;
 
 @Component
 public class PersonDAO {
 	
-	private final JdbcTemplate jdbcTemplate;
+/*	private final JdbcTemplate jdbcTemplate;
 	
 	@Autowired
 	public PersonDAO(JdbcTemplate jdbcTemplate) {
@@ -39,4 +32,5 @@ public class PersonDAO {
 	public void delete(int id) {
 		jdbcTemplate.update("DELETE FROM Person WHERE person_id = ?", id);
 	}
+*/
 }
