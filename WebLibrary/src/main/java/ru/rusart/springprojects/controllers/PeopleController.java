@@ -15,26 +15,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ru.rusart.springprojects.dao.BookDAO;
-import ru.rusart.springprojects.dao.PersonDAO;
 import ru.rusart.springprojects.models.Person;
+import ru.rusart.springprojects.services.BooksService;
+import ru.rusart.springprojects.services.PeopleService;
 
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
 
-	private final PersonDAO personDAO;
-	private final BookDAO bookDAO;
+	private final PeopleService peopleService;
+	private final BooksService booksService;
 	
 	@Autowired
-	public PeopleController(PersonDAO personDAO, BookDAO bookDAO) {
-		this.personDAO = personDAO;
-		this.bookDAO = bookDAO;
+	public PeopleController(PeopleService peopleService, BooksService booksService) {
+		this.peopleService = peopleService;
+		this.booksService = booksService;
 	}
 	
 	@GetMapping()
 	public String index(Model model) {
-		model.addAttribute("people", personDAO.index());
+		model.addAttribute("people", peopleService.findAll());
 		return "people/index";
 	}
 	
@@ -48,20 +48,20 @@ public class PeopleController {
 		if (bindingResult.hasErrors())
 			return "people/new";
 		
-		personDAO.save(person);
+		peopleService.save(person);
 		return "redirect:/people";
 	}
 	
 	@GetMapping("/{id}")
 	public String showPerson(@PathVariable("id") int id, Model model) {
-		model.addAttribute("person", personDAO.showPerson(id));
-		model.addAttribute("list", bookDAO.getBooks(id));
+		model.addAttribute("person", peopleService.findById(id));
+		model.addAttribute("list", booksService.findBooksByPersonId(id));
 		return "people/show";
 	}
 	
 	@GetMapping("/{id}/edit")
 	public String showEdit(@PathVariable("id") int id, Model model) {
-		model.addAttribute("person", personDAO.showPerson(id));
+		model.addAttribute("person", peopleService.findById(id));
 		return "people/edit";
 	}
 	
@@ -71,13 +71,13 @@ public class PeopleController {
 			return "people/{id}/edit";
 		}
 		
-		personDAO.update(id, person);
+		peopleService.update(id, person);
 		return "redirect:/people";
 	}
 	
 	@DeleteMapping("/{id}")
 	public String deletePerson(@PathVariable("id") int id) {
-		personDAO.delete(id);
+		peopleService.delete(id);
 		return "redirect:/people";
 	}
 }
